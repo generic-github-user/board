@@ -47,3 +47,17 @@ class Point {
 		string tostring();
 		vector<int> vec();
 };
+
+class Player {
+		string name;
+		string color;
+		vector<Piece*> pieces;
+
+		public:
+
+		vector<Move*> moves();
+		
+		Player(string n, string c);
+		Player* add(Piece* p);
+		string tostring();
+};
