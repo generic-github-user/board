@@ -152,3 +152,15 @@ Vec<T> operator- (Vec<T> a, Vec<T> b) {
 Point::Point(vector<int> pos) : position(pos) {}
 Point::Point() : position({0, 0}) {}
 Point::Point(int x, int y) : position({x, y}) {}
+
+int& Point::operator[] (int index) { return position[index]; }
+bool Point::operator== (Point& other) { return position == other.position; }
+Point Point::operator+ (Point other) {
+		//return vector<int>(valarray<int>(position) + valarray<int>(other.position));
+		//return Point(x+other.x, y+other.y);
+		//return (add(Vec<int>(position), Vec<int>(other.position))).v;
+		return (Vec<int>(position) + Vec<int>(other.position)).v;
+}
+Point Point::operator- (Point other) {
+		return (Vec<int>(position) - Vec<int>(other.position)).v;
+}
