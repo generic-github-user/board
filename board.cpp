@@ -164,3 +164,13 @@ Point Point::operator+ (Point other) {
 Point Point::operator- (Point other) {
 		return (Vec<int>(position) - Vec<int>(other.position)).v;
 }
+//Board::Board(vector<int> dims)
+
+Board::Board(vector<int> dims, vector<Piece> p = {}) : dimensions(dims), pieces(p) {
+
+}
+
+Board* Board::add(Piece p) {
+		pieces.push_back(p);
+		return this;
+}
