@@ -15,3 +15,35 @@
 #include "include/fmt/format.h"
 
 using namespace std;
+
+class Move;
+class Piece;
+class Board;
+//class Board {
+		//vector<int> dimensions;
+		//vector<Piece> pieces;
+//};
+class Game;
+//class Point;
+
+template <class T>
+class Vec;
+
+class Point {
+		vector<int> position;
+
+		public:
+
+		Point(vector<int> pos);
+		Point();
+		Point(int x, int y);
+
+		int& operator[] (int index);
+		bool operator== (Point& other);
+		Point operator+ (Point other);
+		Point operator- (Point other);
+		Point clone();
+		Point abs();
+		string tostring();
+		vector<int> vec();
+};
