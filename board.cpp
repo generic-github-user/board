@@ -174,3 +174,15 @@ Board* Board::add(Piece p) {
 		pieces.push_back(p);
 		return this;
 }
+
+//vector<Piece*> filter(bool(*f)(Piece p)) {
+vector<Piece*> Board::filter(function<bool(Piece)> f) { // ?
+		vector<Piece*> result;
+		//for (Piece p : pieces) if (f(p)) result.push_back(&p);
+		for (Piece& p : pieces) if (f(p)) result.push_back(&p);
+		return result;
+}
+
+vector<Piece*> Board::filter(Point p) {
+		return filter([&](Piece x) -> bool{ return x.position == p; });
+}
