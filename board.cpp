@@ -104,3 +104,45 @@ class Board {
 		Board* move(Move m);
 		Board clone();
 };
+
+class Range {
+		int start, stop;
+		Range(int a, int b) : start(a), stop(b) {}
+};
+
+
+template <class T>
+class Vec {
+		public:
+
+		vector<T> v;
+		Vec(vector<T> value) : v(value) {}
+		Vec() : v(vector<T>()) {}
+
+		Vec* push(T x) {
+				v.push_back(x);
+				return this;
+		}
+
+		Vec<T> abs() {
+				Vec<T> output;
+				for (T x : v) output.push(std::abs(x));
+				return output;
+		}
+};
+
+template <class T>
+//Vec<T> operator+ (Vec<T>& a, Vec<T>& b) {
+//Vec<T> add (Vec<T>& a, Vec<T>& b) {
+Vec<T> operator+ (Vec<T> a, Vec<T> b) {
+		Vec<T> output;
+		for (int i=0; i<a.v.size(); i++) output.push(a.v[i] + b.v[i]);
+		return output;
+}
+
+template <class T>
+Vec<T> operator- (Vec<T> a, Vec<T> b) {
+		Vec<T> output;
+		for (int i=0; i<a.v.size(); i++) output.push(a.v[i] - b.v[i]);
+		return output;
+}
