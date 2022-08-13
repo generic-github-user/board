@@ -29,6 +29,9 @@ class Game;
 template <class T>
 class Vec;
 
+// A location in space, assuming a typical Euclidean space and associated
+// coordinate system; sometimes also used to represent an offset or motion
+// through space (i.e., a delta)
 class Point {
 		vector<int> position;
 
@@ -48,6 +51,7 @@ class Point {
 		vector<int> vec();
 };
 
+// An "agent" or independent actor participating in a game via moves
 class Player {
 		string name;
 		string color;
@@ -62,6 +66,8 @@ class Player {
 		string tostring();
 };
 
+// Represents a discrete unit that exists on a Board; may or may not be able to
+// move or interact with other pieces, depending on the rules of the game
 class Piece {
 		public:
 
@@ -81,6 +87,8 @@ class Piece {
 		Piece clone();
 };
 
+// A space in which a game takes place; wraps a set of pieces and some topology
+// that defines how they are able to move (along with the game's rules)
 class Board {
 		vector<int> dimensions;
 		vector<Piece> pieces;
@@ -105,12 +113,15 @@ class Board {
 		Board clone();
 };
 
+// A numeric range (start <= stop)
 class Range {
 		int start, stop;
 		Range(int a, int b) : start(a), stop(b) {}
 };
 
 
+// A generic vector class that wraps `std::vector` and provides some additional
+// functionality
 template <class T>
 class Vec {
 		public:
