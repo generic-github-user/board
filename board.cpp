@@ -61,3 +61,22 @@ class Player {
 		Player* add(Piece* p);
 		string tostring();
 };
+
+class Piece {
+		public:
+
+		string name;
+		string symbol;
+		Point position;
+		vector<Move*> history;
+
+		Board* board;
+		Player* player;
+
+		Piece(string n, string s, Point pos);
+		Piece(string n, string s, Point pos, Player* p);
+		vector<Move*> traverse(Point pos, Point delta, vector<Move*> movelist);
+		vector<Move*> moves();
+		string tostring();
+		Piece clone();
+};
