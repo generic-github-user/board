@@ -80,3 +80,27 @@ class Piece {
 		string tostring();
 		Piece clone();
 };
+
+class Board {
+		vector<int> dimensions;
+		vector<Piece> pieces;
+		//Piece*[][]
+
+		public:
+
+		Board(vector<int> dims, vector<Piece> p);
+		Board* add(Piece p);
+		vector<Piece*> filter(function<bool(Piece)> f);
+		vector<Piece*> filter(Point p);
+		bool free(Point p);
+
+		string summary();
+		string tostring();
+		Board* print();
+
+		Board* reflect(int axis);
+		Board* reflect(int axis, Player* p);
+
+		Board* move(Move m);
+		Board clone();
+};
