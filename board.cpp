@@ -146,3 +146,9 @@ Vec<T> operator- (Vec<T> a, Vec<T> b) {
 		for (int i=0; i<a.v.size(); i++) output.push(a.v[i] - b.v[i]);
 		return output;
 }
+
+
+
+Point::Point(vector<int> pos) : position(pos) {}
+Point::Point() : position({0, 0}) {}
+Point::Point(int x, int y) : position({x, y}) {}
