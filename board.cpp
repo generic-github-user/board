@@ -164,6 +164,13 @@ Point Point::operator+ (Point other) {
 Point Point::operator- (Point other) {
 		return (Vec<int>(position) - Vec<int>(other.position)).v;
 }
+
+Point Point::clone() { return Point(position); }
+Point Point::abs() { return Point(Vec<int>(position).abs().v); }
+vector<int> Point::vec() { return position; }
+
+string Point::tostring() { return fmt::format("Point [{}]", fmt::join(position, ", ")); }
+//string Point::tostring() { return ""; }
 //Board::Board(vector<int> dims)
 
 Board::Board(vector<int> dims, vector<Piece> p = {}) : dimensions(dims), pieces(p) {
