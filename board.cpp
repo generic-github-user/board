@@ -203,6 +203,25 @@ string Player::tostring() {
 		return fmt::format("Player [{}, {}, {} moves, {} pieces: []]",
 				name, color, moves().size(), pieces.size());
 }
+
+class Move {
+		public:
+
+		Point origin;
+		Point destination;
+		bool capture;
+		Piece* piece;
+		Point delta;
+
+		Move(Point a, Point b, Piece* p) : origin(a), destination(b), piece(p) {
+				delta = b - a;
+		}
+		
+		int distance() {
+				vector<int> dv = delta.abs().vec();
+				return *std::max_element(dv.begin(), dv.end());
+		}
+};
 //Board::Board(vector<int> dims)
 
 Board::Board(vector<int> dims, vector<Piece> p = {}) : dimensions(dims), pieces(p) {
