@@ -397,6 +397,21 @@ class Game {
 				return *m[rand() % m.size()];
 		}
 
+		Game* move(Move m) {
+				board.move(m);
+				history.push_back(m);
+
+				ply ++;
+				turn = ply % players.size();
+				current = &players[turn];
+				return this;
+		}
+
+		Game clone() {
+				Game result(board.clone(), {}, {});
+				return result;
+		}
+
 		string tostring() {
 				string result = "Game [\n";
 				result += fmt::format("{} moves, ply {}\n", moves().size(), ply);
