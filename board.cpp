@@ -186,3 +186,34 @@ vector<Piece*> Board::filter(function<bool(Piece)> f) { // ?
 vector<Piece*> Board::filter(Point p) {
 		return filter([&](Piece x) -> bool{ return x.position == p; });
 }
+
+string Board::summary() {
+		return fmt::format("Board [{} pieces]\n", pieces.size());
+}
+
+string Board::tostring() {
+		//for (int i : dimensions) std::cout << i;
+		string result = "";
+		vector<Piece*> matches;
+		vector<int> D = dimensions;
+		result += fmt::format("Board [{} pieces]\n", pieces.size());
+		for (int y=0; y<D[1]; y++) {
+				for (int x=0; x<D[0]; x++) {
+						matches = filter(Point(x, y));
+						//if (matches.size() > 0) std::cout << (*matches[0]).clone().symbol;
+						//if (matches.size() > 0) { std::cout << (matches.size()); }
+						//if (matches.size() > 0) { std::cout << std::string(matches[0] -> symbol); }
+						//if (matches.size() > 0) { result.append(std::string(matches.at(0) -> symbol)); }
+
+						if (matches.size() > 0) result += (matches.at(0) -> symbol);
+						else result += " ";
+				}
+				result += "\n";
+		}
+		return result;
+}
+
+Board* Board::print() {
+		std::cout << tostring();
+		return this;
+}
