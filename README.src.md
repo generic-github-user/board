@@ -7,10 +7,7 @@ interest.
 
 ## Contents
 
-- [board](#board)
-  * [Contents](#contents)
-  * [Branches](#branches)
-  * [Stats](#stats)
+[[toc]]
 
 ## Branches
 
@@ -22,16 +19,4 @@ interest.
 
 ## Stats
 
-
-cloc|github.com/AlDanial/cloc v 1.82  T=0.04 s (401.2 files/s, 363085.5 lines/s)
---- | ---
-
-Language|files|blank|comment|code
-:-------|-------:|-------:|-------:|-------:
-C/C++ Header|13|1713|1530|11900
-C++|1|36|24|117
-Markdown|2|15|0|36
-Python|1|5|2|7
---------|--------|--------|--------|--------
-SUM:|17|1769|1556|12060
-
+[[stats]]
