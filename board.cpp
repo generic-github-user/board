@@ -222,6 +222,16 @@ class Move {
 				return *std::max_element(dv.begin(), dv.end());
 		}
 };
+
+
+Piece::Piece(string n, string s, Point pos) : name(n), symbol(s), position(pos) { }
+
+Piece::Piece(string n, string s, Point pos, Player* p) : name(n), symbol(s), position(pos), player(p) {
+		//p -> pieces.push_back(this);
+		p -> add(this);
+}
+
+//Piece* add(Move m) {
 //Board::Board(vector<int> dims)
 
 Board::Board(vector<int> dims, vector<Piece> p = {}) : dimensions(dims), pieces(p) {
