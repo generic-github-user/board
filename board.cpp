@@ -187,6 +187,10 @@ vector<Piece*> Board::filter(Point p) {
 		return filter([&](Piece x) -> bool{ return x.position == p; });
 }
 
+bool Board::free(Point p) {
+		return filter(p).size() == 0;
+}
+
 string Board::summary() {
 		return fmt::format("Board [{} pieces]\n", pieces.size());
 }
@@ -239,4 +243,14 @@ Board* Board::reflect(int axis, Player* p) {
 				add(np);
 		}
 		return this;
+}
+
+Board* Board::move(Move m) {
+		m.piece -> position = m.destination;
+		return this;
+}
+
+Board Board::clone() {
+		Board result = Board(vector<int>(dimensions), vector<Piece>(pieces));
+		return result;
 }
