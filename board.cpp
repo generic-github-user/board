@@ -411,4 +411,28 @@ class Game {
 				return this;
 		}
 };
+
+class ChessGame : public Game {
+		typedef Game super;
+
+		public:
+
+		//ChessGame() {
+		ChessGame() : Game(
+				Board(vector<int>({8, 8}), vector<Piece>()),
+				vector<Move>(),
+				{Player("1", "white"), Player("2", "black")}
+		) {
+				board.add(Piece("rook", "r", Point(0, 0), &players[0]));
+				board.add(Piece("knight", "n", Point(1, 0), &players[0]));
+				board.add(Piece("bishop", "b", Point(2, 0), &players[0]));
+				board.reflect(0);
+				for (int i=0; i<8; i++) board.add(Piece("pawn", "p", Point(i, 1), &players[0]));
+				fmt::print(board.summary());
+
+				board.add(Piece("queen", "q", Point(3, 0), &players[0]));
+				board.add(Piece("king", "k", Point(4, 0), &players[0]));
+				board.reflect(1, &players[1]);
+		}
+};
 };
