@@ -5,11 +5,10 @@ import subprocess
 def runcmd(command):
     return subprocess.run(command.split(), stdout=subprocess.PIPE).stdout.decode('UTF-8')
 
-with open('README.src.md', 'r') as f:
-    content = f.read()
+with open('README.src.md', 'r') as f: content = f.read()
 
+content = content.replace('[[toc]]', runcmd('markdown-toc README.src.md'))
 content = content.replace('[[stats]]', runcmd('cloc --md --vcs=git'))
 
-with open('README.md', 'w') as f:
-    f.write(content)
+with open('README.md', 'w') as f: f.write(content)
 

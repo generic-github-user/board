@@ -5,6 +5,13 @@ games like chess and Go, written in C++. It includes a library of useful
 classes and functions that can be extended to represent almost any game of
 interest.
 
+## Contents
+
+- [board](#board)
+  * [Contents](#contents)
+  * [Branches](#branches)
+  * [Stats](#stats)
+
 ## Branches
 
 - dev: development branch where new features can be tested before merging into `master`
@@ -16,14 +23,15 @@ interest.
 ## Stats
 
 
-cloc|github.com/AlDanial/cloc v 1.82  T=0.05 s (322.7 files/s, 329897.3 lines/s)
+cloc|github.com/AlDanial/cloc v 1.82  T=0.04 s (401.2 files/s, 363085.5 lines/s)
 --- | ---
 
 Language|files|blank|comment|code
 :-------|-------:|-------:|-------:|-------:
 C/C++ Header|13|1713|1530|11900
 C++|1|36|24|117
-Markdown|1|3|0|11
+Markdown|2|15|0|36
+Python|1|5|2|7
 --------|--------|--------|--------|--------
-SUM:|15|1752|1554|12028
+SUM:|17|1769|1556|12060
 
