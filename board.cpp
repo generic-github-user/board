@@ -364,3 +364,19 @@ Board Board::clone() {
 		Board result = Board(vector<int>(dimensions), vector<Piece>(pieces));
 		return result;
 }
+
+
+class Game {
+		protected:
+
+		Board board;
+		vector<Move> history;
+
+		int ply = 0;
+		int turn = 0;
+		vector<Player> players;
+		Player* current;
+
+		public:
+};
+};
