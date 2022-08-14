@@ -171,6 +171,27 @@ vector<int> Point::vec() { return position; }
 
 string Point::tostring() { return fmt::format("Point [{}]", fmt::join(position, ", ")); }
 //string Point::tostring() { return ""; }
+
+
+Player::Player(string n, string c) : name(n), color(c) {}
+
+vector<Move*> Player::moves() {
+		vector<Move*> m;
+		for (Piece* p : pieces) {
+				for (Move* x : p -> moves()) m.push_back(x);
+		}
+		return m;
+}
+
+Player* Player::add(Piece* p) {
+		pieces.push_back(p);
+		return this;
+}
+
+string Player::tostring() {
+		return fmt::format("Player [{}, {}, {} moves, {} pieces: []]",
+				name, color, moves().size(), pieces.size());
+}
 //Board::Board(vector<int> dims)
 
 Board::Board(vector<int> dims, vector<Piece> p = {}) : dimensions(dims), pieces(p) {
