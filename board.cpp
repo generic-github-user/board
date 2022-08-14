@@ -396,5 +396,19 @@ class Game {
 				vector<Move*> m = moves();
 				return *m[rand() % m.size()];
 		}
+
+		string tostring() {
+				string result = "Game [\n";
+				result += fmt::format("{} moves, ply {}\n", moves().size(), ply);
+				for (auto p : players) result += p.tostring() + '\n';
+				result += board.tostring();
+				result += "]";
+				return result;
+		}
+
+		Game* print() {
+				std::cout << tostring();
+				return this;
+		}
 };
 };
