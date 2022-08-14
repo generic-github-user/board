@@ -378,5 +378,23 @@ class Game {
 		Player* current;
 
 		public:
+
+		Game(Board b, vector<Move> m, vector<Player> p) : board(b), history(m), players(p) {
+				current = &players[turn];
+		}
+
+		vector<Move*> moves() {
+				vector<Move*> m;
+				// for (Player p : players) {
+						// for (Move* x : p.moves()) m.push_back(x);
+				// }
+				for (Move* x : current -> moves()) m.push_back(x);
+				return m;
+		}
+
+		Move random() {
+				vector<Move*> m = moves();
+				return *m[rand() % m.size()];
+		}
 };
 };
