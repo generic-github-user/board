@@ -217,3 +217,26 @@ Board* Board::print() {
 		std::cout << tostring();
 		return this;
 }
+
+Board* Board::reflect(int axis) {
+		//for (Piece& p : pieces) {
+		int n = pieces.size();
+		for (int i=0; i<n; i++) {
+				//Piece p = pieces[i];
+				Piece np = pieces[i].clone();
+				np.position[axis] = dimensions[axis] - pieces[i].position[axis] - 1;
+				add(np);
+		}
+		return this;
+}
+
+Board* Board::reflect(int axis, Player* p) {
+		int n = pieces.size();
+		for (int i=0; i<n; i++) {
+				Piece np = pieces[i].clone();
+				np.player = p;
+				np.position[axis] = dimensions[axis] - pieces[i].position[axis] - 1;
+				add(np);
+		}
+		return this;
+}
