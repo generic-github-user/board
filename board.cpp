@@ -232,6 +232,48 @@ Piece::Piece(string n, string s, Point pos, Player* p) : name(n), symbol(s), pos
 }
 
 //Piece* add(Move m) {
+
+vector<Move*> Piece::traverse(Point pos, Point delta, vector<Move*> movelist) {
+		Point next = pos + delta;
+		if (board->free(next)) {
+				movelist.push_back(new Move(pos, next, this));
+				traverse(next, delta, movelist);
+		}
+		return movelist;
+}
+
+vector<Move*> Piece::moves() {
+		fmt::print("Getting moves for {}\n", tostring());
+		vector<Move*> m;
+		//int x = position[0];
+		//int y = position[1];
+
+		//if (name == "pawn") {
+		//		//fmt::print("pawn");
+		//		if (history.size() == 0) m.push_back(new Move(position, position+Point(0, 2), this));
+		//		m.push_back(new Move(position, position+Point(0, 1), this));
+		//}
+		//if (name == "rook" || name == "queen") {
+		//		//for (int i=x; i<board->dimensions[0]; i++) { }
+		//		traverse(position, Point(1, 0), m);
+		//		traverse(position, Point(-1, 0), m);
+		//		traverse(position, Point(0, 1), m);
+		//		traverse(position, Point(0, -1), m);
+		//}
+		//if (name == "knight") {}
+		//if (name == "king") {}
+		return m;
+}
+
+string Piece::tostring() {
+		return fmt::format("Piece [{}, {}, {}]", name, symbol, position.tostring());
+		//return "";
+}
+
+Piece Piece::clone() {
+		return Piece(name, symbol, position.clone(), player);
+}
+
 //Board::Board(vector<int> dims)
 
 Board::Board(vector<int> dims, vector<Piece> p = {}) : dimensions(dims), pieces(p) {
