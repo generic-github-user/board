@@ -15,15 +15,4 @@ interest.
 
 ## Stats
 
-
-cloc|github.com/AlDanial/cloc v 1.82  T=0.05 s (322.7 files/s, 329897.3 lines/s)
---- | ---
-
-Language|files|blank|comment|code
-:-------|-------:|-------:|-------:|-------:
-C/C++ Header|13|1713|1530|11900
-C++|1|36|24|117
-Markdown|1|3|0|11
---------|--------|--------|--------|--------
-SUM:|15|1752|1554|12028
-
+[[stats]]
