@@ -14,6 +14,12 @@
 #include "include/fmt/core.h"
 #include "include/fmt/format.h"
 
+#include "move.h"
+#include "piece.h"
+#include "board.h"
+#include "game.h"
+#include "player.h"
+
 using namespace std;
 
 class Move;
@@ -28,90 +34,6 @@ class Game;
 
 template <class T>
 class Vec;
-
-// A location in space, assuming a typical Euclidean space and associated
-// coordinate system; sometimes also used to represent an offset or motion
-// through space (i.e., a delta)
-class Point {
-		vector<int> position; // Coordinates of the point
-
-		public:
-
-		Point(vector<int> pos); // Takes a vector and returns a new point
-		Point(); // Default point constructor (i.e., (0, 0))
-		Point(int x, int y); // Takes an x and y coordinate and returns a new point
-
-		int& operator[] (int index); // Returns the component along the specified axis
-		bool operator== (Point& other); // Test point equality (by value)
-		Point operator+ (Point other); // Elementwise addition of points
-		Point operator- (Point other); // Elementwise subtraction of points
-		Point clone(); // Returns a copy of this point
-		Point abs(); // Applies the absolute value function to each axis
-		string tostring(); // Generate a short string representation of the point
-		vector<int> vec(); // Convert this point to a vector
-};
-
-// An "agent" or independent actor participating in a game via moves
-class Player {
-		string name; // A unique name or identifier used to represent the player
-		string color; // The player's color, where applicable
-		vector<Piece*> pieces; // A list of references to pieces associated with this player (the actual `Piece` instances are stored in the `Board` class)
-
-		public:
-
-		vector<Move*> moves(); // Returns the set of legal moves currently available to the player
-		
-		Player(string n, string c); // Initializes a new `Player`
-		Player* add(Piece* p); // Add an item to this player's piece list
-		string tostring(); // Returns a string summarizing an instance of this class
-};
-
-// Represents a discrete unit that exists on a Board; may or may not be able to
-// move or interact with other pieces, depending on the rules of the game
-class Piece {
-		public:
-
-		string name; // The piece's name (specifically, its type)
-		string symbol; // A symbol (ideally a single character) used to represent this piece, e.g. when rendering ASCII representations of game boards
-		Point position; // Location of the piece on the board
-		vector<Move*> history;
-
-		Board* board; // The game board this piece "exists" within
-		Player* player; // A reference to the piece's owner or the player associated with it in some sense
-
-		Piece(string n, string s, Point pos); // Construct a piece not associated with a player
-		Piece(string n, string s, Point pos, Player* p); // Construct a piece associated with a player
-		vector<Move*> traverse(Point pos, Point delta, vector<Move*> movelist); // Attempts a "virtual move" in the direction specified by `delta` until a stopping condition is met; each intermediate position is added to `movelist`
-		vector<Move*> moves(); // Returns a list of (references to) available moves for this piece
-		string tostring(); // Returns a string summarizing an instance of this class
-		Piece clone(); // Returns a copy of this instance
-};
-
-// A space in which a game takes place; wraps a set of pieces and some topology
-// that defines how they are able to move (along with the game's rules)
-class Board {
-		vector<int> dimensions; // Shape of the board (will eventually support non-rectangular topologies)
-		vector<Piece> pieces; // List of pieces on the board
-		//Piece*[][]
-
-		public:
-
-		Board(vector<int> dims, vector<Piece> p); // Board constructor
-		Board* add(Piece p); // Add a piece to this board
-		vector<Piece*> filter(function<bool(Piece)> f); // Return pointers to the pieces that match the predicate function `f`
-		vector<Piece*> filter(Point p); // Return pointers to the pieces at position `p`
-		bool free(Point p); // Check whether any pieces are present at `p`
-
-		string summary(); // Returns an abridged string representation of the Board
-		string tostring(); // Returns a string summarizing an instance of this class
-		Board* print(); // Prints this Board instance to stdout
-
-		Board* reflect(int axis); // Clones this board's pieces (into itself), reflecting over the given axis
-		Board* reflect(int axis, Player* p); // Clones this board's pieces (into itself), reflecting over the given axis; sets the cloned piece's owner to `p`
-
-		Board* move(Move m); // Executes move `m`
-		Board clone(); // Returns a copy of this instance
-};
 
 // A numeric range (start <= stop)
 class Range {
@@ -204,24 +126,16 @@ string Player::tostring() {
 				name, color, moves().size(), pieces.size());
 }
 
-class Move {
-		public:
 
-		Point origin;
-		Point destination;
-		bool capture;
-		Piece* piece;
-		Point delta;
 
-		Move(Point a, Point b, Piece* p) : origin(a), destination(b), piece(p) {
-				delta = b - a;
-		}
-		
-		int distance() {
-				vector<int> dv = delta.abs().vec();
-				return *std::max_element(dv.begin(), dv.end());
-		}
-};
+Move::Move(Point a, Point b, Piece* p) : origin(a), destination(b), piece(p) {
+		delta = b - a;
+}
+
+int Move::distance() {
+		vector<int> dv = delta.abs().vec();
+		return *std::max_element(dv.begin(), dv.end());
+}
 
 
 Piece::Piece(string n, string s, Point pos) : name(n), symbol(s), position(pos) { }
@@ -366,64 +280,3 @@ Board Board::clone() {
 }
 
 
-class Game {
-		protected:
-
-		Board board;
-		vector<Move> history;
-
-		int ply = 0;
-		int turn = 0;
-		vector<Player> players;
-		Player* current;
-
-		public:
-
-		Game(Board b, vector<Move> m, vector<Player> p) : board(b), history(m), players(p) {
-				current = &players[turn];
-		}
-
-		vector<Move*> moves() {
-				vector<Move*> m;
-				// for (Player p : players) {
-						// for (Move* x : p.moves()) m.push_back(x);
-				// }
-				for (Move* x : current -> moves()) m.push_back(x);
-				return m;
-		}
-
-		Move random() {
-				vector<Move*> m = moves();
-				return *m[rand() % m.size()];
-		}
-
-		Game* move(Move m) {
-				board.move(m);
-				history.push_back(m);
-
-				ply ++;
-				turn = ply % players.size();
-				current = &players[turn];
-				return this;
-		}
-
-		Game clone() {
-				Game result(board.clone(), {}, {});
-				return result;
-		}
-
-		string tostring() {
-				string result = "Game [\n";
-				result += fmt::format("{} moves, ply {}\n", moves().size(), ply);
-				for (auto p : players) result += p.tostring() + '\n';
-				result += board.tostring();
-				result += "]";
-				return result;
-		}
-
-		Game* print() {
-				std::cout << tostring();
-				return this;
-		}
-};
-};
