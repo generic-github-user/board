@@ -1,8 +1,9 @@
-#include "piece.h"
-#include "point.h"
-
 #ifndef board_h
 #define board_h
+
+#include <functional>
+#include "piece.h"
+#include "point.h"
 
 // A space in which a game takes place; wraps a set of pieces and some topology
 // that defines how they are able to move (along with the game's rules)

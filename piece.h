@@ -1,9 +1,10 @@
+#ifndef piece_h
+#define piece_h
+
 #include "move.h"
 #include "point.h"
 #include "player.h"
-
-#ifndef piece_h
-#define piece_h
+#include "board.h"
 
 // Represents a discrete unit that exists on a Board; may or may not be able to
 // move or interact with other pieces, depending on the rules of the game

@@ -2,6 +2,9 @@
 #include <vector>
 using namespace std;
 
+#ifndef point_h
+#define point_h
+
 // A location in space, assuming a typical Euclidean space and associated
 // coordinate system; sometimes also used to represent an offset or motion
 // through space (i.e., a delta)
@@ -23,3 +26,5 @@ class Point {
 		string tostring(); // Generate a short string representation of the point
 		vector<int> vec(); // Convert this point to a vector
 };
+
+#endif

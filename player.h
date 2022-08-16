@@ -1,7 +1,7 @@
-#include "piece.h"
-
 #ifndef player_h
 #define player_h
+
+#include "piece.h"
 
 // An "agent" or independent actor participating in a game via moves
 class Player {

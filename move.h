@@ -1,8 +1,8 @@
-#include "point.h"
-#include "piece.h"
-
 #ifndef move_h
 #define move_h
+
+#include "point.h"
+#include "piece.h"
 
 class Move {
 		public:
