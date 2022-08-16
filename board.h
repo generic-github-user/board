@@ -1,6 +1,9 @@
 #include "piece.h"
 #include "point.h"
 
+#ifndef board_h
+#define board_h
+
 // A space in which a game takes place; wraps a set of pieces and some topology
 // that defines how they are able to move (along with the game's rules)
 class Board {
@@ -26,3 +29,5 @@ class Board {
 		Board* move(Move m); // Executes move `m`
 		Board clone(); // Returns a copy of this instance
 };
+
+#endif

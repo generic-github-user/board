@@ -2,6 +2,9 @@
 #include "point.h"
 #include "player.h"
 
+#ifndef piece_h
+#define piece_h
+
 // Represents a discrete unit that exists on a Board; may or may not be able to
 // move or interact with other pieces, depending on the rules of the game
 class Piece {
@@ -22,3 +25,5 @@ class Piece {
 		string tostring(); // Returns a string summarizing an instance of this class
 		Piece clone(); // Returns a copy of this instance
 };
+
+#endif

@@ -1,6 +1,9 @@
 #include "point.h"
 #include "piece.h"
 
+#ifndef move_h
+#define move_h
+
 class Move {
 		public:
 
@@ -13,3 +16,5 @@ class Move {
 		Move(Point a, Point b, Piece* p);
 		int distance();
 };
+
+#endif
